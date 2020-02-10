@@ -9,15 +9,20 @@
 import Foundation
 
 // MARK: - Algorithm input parameters
-// TODO: input from console
-let length: UInt = 100 // l
+// TODO (optional): input from console
+let length: UInt = 101 //2000 // l
 let populationSize: UInt = 10 // N
-let pX = 0.15 // Px mutation possibility for one symbol
-let generationRule: IndividualFactory.GenerationRule = .random
-let numberOfIterations = 20_000
+let pX = 0.015 // Px basic mutation probability for one symbol
+var pM = MutationProbability.basic // Pm mutation probability ofr one symbol
+// TODO: implement pM changing
+let generationRule: IndividualFactory.GenerationRule = .uber
+let numberOfIterations = 3//20_000
 
 // MARK: - Main flow
 let factory = IndividualFactory(length: length, populationSize: populationSize)
+let healthStandard = try? HealthStandard(forLength: Int(length))
+print(healthStandard?.description ?? "Функція пристосованості недоступна для значення довжини l=\(length)")
+let parentChoosing: ParentChoosing = Rws()
 
 // MARK: - Initialization
 var population = factory.newPopulation(generationRule)
@@ -30,17 +35,28 @@ for iteration in (1...numberOfIterations) {
 
 	print("Ітерація: \(iteration)")
 
-	// MARK: - Evaluation
-	// TODO: implement
+	population.forEach { individual in
+		// MARK: - Evaluation
+//		print("Індивід: \(individual), \r\nздоров'я: \(healthStandard!.testFitness(individual: individual))")
 
-	// MARK: - Kill unhealthy (+ drawing)
-	// TODO: implement
+
+		// MARK: - Kill unhealthy (+ drawing!!!!)
+		// TODO:  kill if not healthy
+	}
+	print(population.healthStats(accordingTo: healthStandard!))
 
 	// MARK: - Choose parents' pool
-	// TODO: implement
+	population = parentChoosing.parents(from:
+		population.map { ($0, healthStandard!.testFitness(individual: $0)) }
+	)
+	print("Батьківський пул: \(population.beautifiedDescription)")
+
+	print(population.healthStats(accordingTo: healthStandard!))
 
 	// MARK: - Commit mutations
-	// TODO: implement
+	population.mutateAll(withProbability: pM)
+
+//	print("\r\n\r\nПопуляція: \(population.beautifiedDescription)")
 }
 
-print("\r\nКінцева популяція: \(population.beautifiedDescription)")
+//print("\r\nКінцева популяція: \(population.beautifiedDescription)")

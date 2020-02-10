@@ -1,5 +1,5 @@
 //
-//  SymbolFactory.swift
+//  IndividualFactory.swift
 //  Evolution
 //
 //  Created by Alex Frankiv on 08.02.2020.
@@ -9,6 +9,9 @@
 import Foundation
 
 final class IndividualFactory {
+
+	// MARK: - Constants
+	static let perfectSymbol = Symbol.A
 
 	// MARK: - Generation rule
 	enum GenerationRule {
@@ -28,7 +31,7 @@ final class IndividualFactory {
 	// MARK: - Generating über population
 	// perfect individual according to the task
 	private func newUberIndividual() -> Individual {
-		return Array<Symbol>(repeating: .A, count: self.length)
+		return Array<Symbol>(repeating: Self.perfectSymbol, count: self.length)
 	}
 
 	private func newUberPopulation() -> Population {

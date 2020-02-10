@@ -9,9 +9,14 @@
 /* Begin PBXBuildFile section */
 		FA0048C223EF12B000C24747 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048C123EF12B000C24747 /* main.swift */; };
 		FA0048CA23EF130000C24747 /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048C923EF130000C24747 /* Symbol.swift */; };
-		FA0048CC23EF133000C24747 /* SymbolFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048CB23EF133000C24747 /* SymbolFactory.swift */; };
+		FA0048CC23EF133000C24747 /* IndividualFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048CB23EF133000C24747 /* IndividualFactory.swift */; };
 		FA0048CE23EF146B00C24747 /* Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048CD23EF146B00C24747 /* Individual.swift */; };
 		FA0048D023EF162200C24747 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048CF23EF162200C24747 /* Population.swift */; };
+		FA0048D223EF24BD00C24747 /* MutationProbability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048D123EF24BD00C24747 /* MutationProbability.swift */; };
+		FA0048D423F07BC600C24747 /* HealthStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048D323F07BC600C24747 /* HealthStandard.swift */; };
+		FA0048D623F086F900C24747 /* EvolutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048D523F086F900C24747 /* EvolutionError.swift */; };
+		FA35E30323F1E2B3001396F5 /* ParentChoosing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35E30223F1E2B3001396F5 /* ParentChoosing.swift */; };
+		FA35E30523F1E2FB001396F5 /* Rws.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35E30423F1E2FB001396F5 /* Rws.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,9 +35,14 @@
 		FA0048BE23EF12B000C24747 /* Evolution */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Evolution; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0048C123EF12B000C24747 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FA0048C923EF130000C24747 /* Symbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
-		FA0048CB23EF133000C24747 /* SymbolFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolFactory.swift; sourceTree = "<group>"; };
+		FA0048CB23EF133000C24747 /* IndividualFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualFactory.swift; sourceTree = "<group>"; };
 		FA0048CD23EF146B00C24747 /* Individual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Individual.swift; sourceTree = "<group>"; };
 		FA0048CF23EF162200C24747 /* Population.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Population.swift; sourceTree = "<group>"; };
+		FA0048D123EF24BD00C24747 /* MutationProbability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutationProbability.swift; sourceTree = "<group>"; };
+		FA0048D323F07BC600C24747 /* HealthStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStandard.swift; sourceTree = "<group>"; };
+		FA0048D523F086F900C24747 /* EvolutionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvolutionError.swift; sourceTree = "<group>"; };
+		FA35E30223F1E2B3001396F5 /* ParentChoosing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentChoosing.swift; sourceTree = "<group>"; };
+		FA35E30423F1E2FB001396F5 /* Rws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rws.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,12 +84,25 @@
 		FA0048C823EF12E900C24747 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FA35E30123F1E275001396F5 /* ParentChoosing */,
 				FA0048C923EF130000C24747 /* Symbol.swift */,
 				FA0048CD23EF146B00C24747 /* Individual.swift */,
 				FA0048CF23EF162200C24747 /* Population.swift */,
-				FA0048CB23EF133000C24747 /* SymbolFactory.swift */,
+				FA0048CB23EF133000C24747 /* IndividualFactory.swift */,
+				FA0048D123EF24BD00C24747 /* MutationProbability.swift */,
+				FA0048D323F07BC600C24747 /* HealthStandard.swift */,
+				FA0048D523F086F900C24747 /* EvolutionError.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FA35E30123F1E275001396F5 /* ParentChoosing */ = {
+			isa = PBXGroup;
+			children = (
+				FA35E30223F1E2B3001396F5 /* ParentChoosing.swift */,
+				FA35E30423F1E2FB001396F5 /* Rws.swift */,
+			);
+			path = ParentChoosing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,10 +163,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA0048D223EF24BD00C24747 /* MutationProbability.swift in Sources */,
 				FA0048CE23EF146B00C24747 /* Individual.swift in Sources */,
-				FA0048CC23EF133000C24747 /* SymbolFactory.swift in Sources */,
+				FA0048CC23EF133000C24747 /* IndividualFactory.swift in Sources */,
 				FA0048C223EF12B000C24747 /* main.swift in Sources */,
+				FA35E30323F1E2B3001396F5 /* ParentChoosing.swift in Sources */,
+				FA0048D423F07BC600C24747 /* HealthStandard.swift in Sources */,
 				FA0048CA23EF130000C24747 /* Symbol.swift in Sources */,
+				FA0048D623F086F900C24747 /* EvolutionError.swift in Sources */,
+				FA35E30523F1E2FB001396F5 /* Rws.swift in Sources */,
 				FA0048D023EF162200C24747 /* Population.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

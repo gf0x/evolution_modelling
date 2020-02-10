@@ -15,6 +15,17 @@ extension Individual {
 	var beautifiedDescription: String {
 		return self.reduce("[", { $0 + $1.rawValue }) + "]"
 	}
-
 	// TODO: implement health
+}
+
+// MARK: - Mutation
+extension Individual {
+
+	mutating func mutate(withProbability pM: Double) {
+		for index in self.indices {
+			if Double.randomProbability < pM {
+				self[index].mutate()
+			}
+		}
+	}
 }
