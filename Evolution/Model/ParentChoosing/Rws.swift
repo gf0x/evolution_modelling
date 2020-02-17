@@ -13,7 +13,7 @@ final class Rws: ParentChoosing {
 	func parents(from testedPopulation: [(Individual, Double)]) -> Population {
 		let totalHealth = testedPopulation.map { $1 }.reduce(0, +)
 		let beingInPoolProbabilities = testedPopulation.map { ($0, $1 / totalHealth) }
-		let expectedCountInPool = beingInPoolProbabilities.map { ($0.0, Int($0.1) * testedPopulation.count) }
+//		let expectedCountInPool = beingInPoolProbabilities.map { ($0.0, Int($0.1) * testedPopulation.count) }
 
 		var parentPool = Population()
 		for _ in (0..<testedPopulation.count) {

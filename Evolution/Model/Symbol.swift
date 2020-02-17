@@ -16,6 +16,9 @@ enum Symbol: String, Codable, CaseIterable, CustomStringConvertible {
 	}
 
 	mutating func mutate() {
-		self = Symbol.allCases.randomElement()!
+		let fixedPreviousValue = self
+		repeat {
+			self = Symbol.allCases.randomElement()!
+		} while self == fixedPreviousValue
 	}
 }

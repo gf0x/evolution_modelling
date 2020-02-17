@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftStats
 
 final class IndividualFactory {
 
@@ -15,7 +16,7 @@ final class IndividualFactory {
 
 	// MARK: - Generation rule
 	enum GenerationRule {
-		case uber, random, normal
+		case uber, uniform, normal
 	}
 
 	// MARK: - Parameters
@@ -38,27 +39,38 @@ final class IndividualFactory {
 		return Array<Individual>(repeating: newUberIndividual(), count: self.populationSize)
 	}
 
-	// MARK: - Generating random population
-	private func newRandomIndividual() -> Individual {
-		return (0..<self.length).map { _ in Symbol.allCases.randomElement()! }
-	}
-
-	private func newRandomPopulation() -> Population {
-		return (0..<self.populationSize).map { _ in self.newRandomIndividual() }
+	// MARK: - Generating uniform population
+	private func newUniformPopulation() -> Population {
+		return self.population(accordingTo: SwiftStats.Distributions.Uniform(a: 0, b: Double(length)))
 	}
 
 	// MARK: - Generating normal population
 	private func newNormalPopulation() -> Population {
-		// TODO: implement
-		return []
+		let halfLength = Double(length) / 2
+		return self.population(accordingTo: SwiftStats.Distributions.Normal(m: halfLength, v: halfLength))
 	}
 
 	// MARK: - Public API
 	func newPopulation(_ rule: GenerationRule) -> Population {
 		switch rule {
 		case .uber: return newUberPopulation()
-		case .random: return newRandomPopulation()
+		case .uniform: return newUniformPopulation()
 		case .normal: return newNormalPopulation()
 		}
+	}
+
+	// MARK: - Generating population according to distribution
+	private func population(accordingTo distribution: SwiftStats.ContinuousDistribution) -> Population {
+		let hammingDistances = distribution.random(populationSize).map { Int($0.rounded()) }
+		print(hammingDistances)
+		let uniDistribution = SwiftStats.Distributions.Uniform(a: 0, b: Double(length) - 1)
+		var initialPopulation = newUberPopulation()
+		for (hammingDistance, individualIndex) in zip(hammingDistances, initialPopulation.indices) {
+			let indicesToMutate = uniDistribution.random(hammingDistance).map { Int($0.rounded()) }
+			for index in indicesToMutate {
+				initialPopulation[individualIndex][index].mutate()
+			}
+		}
+		return initialPopulation
 	}
 }

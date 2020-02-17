@@ -10,13 +10,13 @@ import Foundation
 
 // MARK: - Algorithm input parameters
 // TODO (optional): input from console
-let length: UInt = 101 //2000 // l
+let length: UInt = 100 //2000 // l
 let populationSize: UInt = 10 // N
-let pX = 0.015 // Px basic mutation probability for one symbol
+let pX = 0.0015 // Px basic mutation probability for one symbol
 var pM = MutationProbability.basic // Pm mutation probability ofr one symbol
 // TODO: implement pM changing
-let generationRule: IndividualFactory.GenerationRule = .uber
-let numberOfIterations = 3//20_000
+let generationRule: IndividualFactory.GenerationRule = .uniform
+let numberOfIterations = 1//20_000
 
 // MARK: - Main flow
 let factory = IndividualFactory(length: length, populationSize: populationSize)

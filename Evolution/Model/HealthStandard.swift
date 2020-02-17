@@ -39,11 +39,9 @@ class HealthStandard {
 
 	// MARK: - Lifecycle
 	init(forLength length: Int) throws {
-		guard true/*length > 100*/ else {
-			throw EvolutionError.illegalLength
-		}
 		self.length = length
 		// neutral mutation 1
+		// TODO: rounded
 		self.neutralMutation1Range = Set<Int>((0..<Int(Double(length) * neutralMutation1Percentage)))
 		// neutral mutation 2
 		let safe2IndexesCount = Int(Double(length) * neutralMutation2Percentage)
@@ -106,6 +104,7 @@ class HealthStandard {
 	}
 
 	func testFitness(individual: Individual) -> Double {
+		guard self.length >= 100 else { return Double(self.length) }
 		var patogenicCount = 0
 		for (index, symbol) in individual.enumerated() {
 			switch mutationType(of: symbol, at: index) {

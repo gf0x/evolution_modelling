@@ -15,6 +15,8 @@
 		FA0048D223EF24BD00C24747 /* MutationProbability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048D123EF24BD00C24747 /* MutationProbability.swift */; };
 		FA0048D423F07BC600C24747 /* HealthStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048D323F07BC600C24747 /* HealthStandard.swift */; };
 		FA0048D623F086F900C24747 /* EvolutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0048D523F086F900C24747 /* EvolutionError.swift */; };
+		FA0E1DCD23FB2CB60079FA90 /* SwiftStats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0E1DCB23FB27CB0079FA90 /* SwiftStats.framework */; };
+		FA0E1DCE23FB2CB60079FA90 /* SwiftStats.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA0E1DCB23FB27CB0079FA90 /* SwiftStats.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA35E30323F1E2B3001396F5 /* ParentChoosing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35E30223F1E2B3001396F5 /* ParentChoosing.swift */; };
 		FA35E30523F1E2FB001396F5 /* Rws.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35E30423F1E2FB001396F5 /* Rws.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +31,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		FA0E1DCF23FB2CB60079FA90 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FA0E1DCE23FB2CB60079FA90 /* SwiftStats.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +54,7 @@
 		FA0048D123EF24BD00C24747 /* MutationProbability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutationProbability.swift; sourceTree = "<group>"; };
 		FA0048D323F07BC600C24747 /* HealthStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStandard.swift; sourceTree = "<group>"; };
 		FA0048D523F086F900C24747 /* EvolutionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvolutionError.swift; sourceTree = "<group>"; };
+		FA0E1DCB23FB27CB0079FA90 /* SwiftStats.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftStats.framework; sourceTree = "<group>"; };
 		FA35E30223F1E2B3001396F5 /* ParentChoosing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentChoosing.swift; sourceTree = "<group>"; };
 		FA35E30423F1E2FB001396F5 /* Rws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rws.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA0E1DCD23FB2CB60079FA90 /* SwiftStats.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +90,7 @@
 		FA0048C023EF12B000C24747 /* Evolution */ = {
 			isa = PBXGroup;
 			children = (
+				FA0E1DC823FB27790079FA90 /* Lib */,
 				FA0048C823EF12E900C24747 /* Model */,
 				FA0048C123EF12B000C24747 /* main.swift */,
 			);
@@ -96,6 +112,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		FA0E1DC823FB27790079FA90 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				FA0E1DCB23FB27CB0079FA90 /* SwiftStats.framework */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
 		FA35E30123F1E275001396F5 /* ParentChoosing */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +139,7 @@
 				FA0048BA23EF12B000C24747 /* Sources */,
 				FA0048BB23EF12B000C24747 /* Frameworks */,
 				FA0048BC23EF12B000C24747 /* CopyFiles */,
+				FA0E1DCF23FB2CB60079FA90 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -298,6 +323,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MT49R2KND7;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Evolution/Lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -309,6 +338,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MT49R2KND7;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Evolution/Lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
