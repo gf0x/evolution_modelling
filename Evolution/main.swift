@@ -12,7 +12,6 @@ import Foundation
 // TODO (optional): input from console
 let length: UInt = 100 //2000 // l
 let populationSize: UInt = 100 // N
-let pX = 0.0015 // Px basic mutation probability for one symbol
 var pM = MutationProbability.basic // Pm mutation probability ofr one symbol
 // TODO: implement pM changing
 let generationRule: IndividualFactory.GenerationRule = .normal(1)
@@ -23,6 +22,8 @@ let factory = IndividualFactory(length: length, populationSize: populationSize)
 let healthStandard = HealthStandardFactory.single.healthStandard(for: Int(length))
 print(healthStandard.description)
 let parentChoosing: ParentChoosing = TournamentSelection(t: 12)//Rws()
+let pX = getPx(forSelectionType: parentChoosing, length: length, populationSize: populationSize)
+
 
 // MARK: - Initialization
 var population = factory.newPopulation(generationRule)

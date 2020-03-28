@@ -18,7 +18,9 @@
 		FA35E30323F1E2B3001396F5 /* ParentChoosing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35E30223F1E2B3001396F5 /* ParentChoosing.swift */; };
 		FA35E30523F1E2FB001396F5 /* Rws.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35E30423F1E2FB001396F5 /* Rws.swift */; };
 		FA410F9823FBE0E00045B04D /* TournamentSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA410F9723FBE0E00045B04D /* TournamentSelection.swift */; };
-		FAF4FE85242FCAA800E19C10 /* SwiftStats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF4FE84242FCAA800E19C10 /* SwiftStats.framework */; };
+		FAF4FE89242FD49900E19C10 /* PxProbability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4FE88242FD49900E19C10 /* PxProbability.swift */; };
+		FAF4FE8A242FDCDE00E19C10 /* SwiftStats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF4FE84242FCAA800E19C10 /* SwiftStats.framework */; };
+		FAF4FE8B242FDCDE00E19C10 /* SwiftStats.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FAF4FE84242FCAA800E19C10 /* SwiftStats.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +39,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				FAF4FE8B242FDCDE00E19C10 /* SwiftStats.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,6 +60,7 @@
 		FA35E30423F1E2FB001396F5 /* Rws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rws.swift; sourceTree = "<group>"; };
 		FA410F9723FBE0E00045B04D /* TournamentSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentSelection.swift; sourceTree = "<group>"; };
 		FAF4FE84242FCAA800E19C10 /* SwiftStats.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftStats.framework; sourceTree = "<group>"; };
+		FAF4FE88242FD49900E19C10 /* PxProbability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PxProbability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAF4FE85242FCAA800E19C10 /* SwiftStats.framework in Frameworks */,
+				FAF4FE8A242FDCDE00E19C10 /* SwiftStats.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,14 +104,9 @@
 		FA0048C823EF12E900C24747 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FAF4FE87242FD45200E19C10 /* Core */,
+				FAF4FE86242FD43100E19C10 /* Individual */,
 				FA35E30123F1E275001396F5 /* ParentChoosing */,
-				FA0048C923EF130000C24747 /* Symbol.swift */,
-				FA0048CD23EF146B00C24747 /* Individual.swift */,
-				FA0048CF23EF162200C24747 /* Population.swift */,
-				FA0048CB23EF133000C24747 /* IndividualFactory.swift */,
-				FA0048D123EF24BD00C24747 /* MutationProbability.swift */,
-				FA0048D323F07BC600C24747 /* HealthStandard.swift */,
-				FA0048D523F086F900C24747 /* EvolutionError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -128,6 +127,28 @@
 				FA410F9723FBE0E00045B04D /* TournamentSelection.swift */,
 			);
 			path = ParentChoosing;
+			sourceTree = "<group>";
+		};
+		FAF4FE86242FD43100E19C10 /* Individual */ = {
+			isa = PBXGroup;
+			children = (
+				FA0048C923EF130000C24747 /* Symbol.swift */,
+				FA0048CD23EF146B00C24747 /* Individual.swift */,
+				FA0048CF23EF162200C24747 /* Population.swift */,
+				FA0048CB23EF133000C24747 /* IndividualFactory.swift */,
+			);
+			path = Individual;
+			sourceTree = "<group>";
+		};
+		FAF4FE87242FD45200E19C10 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				FA0048D123EF24BD00C24747 /* MutationProbability.swift */,
+				FAF4FE88242FD49900E19C10 /* PxProbability.swift */,
+				FA0048D323F07BC600C24747 /* HealthStandard.swift */,
+				FA0048D523F086F900C24747 /* EvolutionError.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +213,7 @@
 				FA410F9823FBE0E00045B04D /* TournamentSelection.swift in Sources */,
 				FA0048D223EF24BD00C24747 /* MutationProbability.swift in Sources */,
 				FA0048CE23EF146B00C24747 /* Individual.swift in Sources */,
+				FAF4FE89242FD49900E19C10 /* PxProbability.swift in Sources */,
 				FA0048CC23EF133000C24747 /* IndividualFactory.swift in Sources */,
 				FA0048C223EF12B000C24747 /* main.swift in Sources */,
 				FA35E30323F1E2B3001396F5 /* ParentChoosing.swift in Sources */,

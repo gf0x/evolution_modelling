@@ -11,6 +11,10 @@ import SwiftStats
 
 final class TournamentSelection: ParentChoosing {
 
+	lazy var stringRepresentation: String = {
+		"tournament_\(self.t)"
+	}()
+
 	// MARK: - Properties
 	let t: Int
 

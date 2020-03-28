@@ -10,6 +10,8 @@ import Foundation
 
 final class Rws: ParentChoosing {
 
+	let stringRepresentation: String = "rws"
+
 	func parents(from testedPopulation: [(individual: Individual, health: Double)]) -> Population {
 		let totalHealth = testedPopulation.map { $1 }.reduce(0, +)
 		let beingInPoolProbabilities = testedPopulation.map { ($0, $1 / totalHealth) }
