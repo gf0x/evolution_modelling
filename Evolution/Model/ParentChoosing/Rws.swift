@@ -10,7 +10,7 @@ import Foundation
 
 final class Rws: ParentChoosing {
 
-	func parents(from testedPopulation: [(Individual, Double)]) -> Population {
+	func parents(from testedPopulation: [(individual: Individual, health: Double)]) -> Population {
 		let totalHealth = testedPopulation.map { $1 }.reduce(0, +)
 		let beingInPoolProbabilities = testedPopulation.map { ($0, $1 / totalHealth) }
 //		let expectedCountInPool = beingInPoolProbabilities.map { ($0.0, Int($0.1) * testedPopulation.count) }

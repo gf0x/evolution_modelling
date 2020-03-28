@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ParentChoosing {
-	func parents(from testedPopulation: [(Individual, Double)]) -> Population
+	func parents(from testedPopulation: [(individual: Individual, health: Double)]) -> Population
 }

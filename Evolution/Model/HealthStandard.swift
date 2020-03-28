@@ -8,6 +8,27 @@
 
 import Foundation
 
+class HealthStandardFactory {
+
+	// MARK: - Singleton
+	static let single = HealthStandardFactory()
+	private init() {}
+
+	// MARK: - Registry of standards
+	private var readyStasndards = [Int: HealthStandard]()
+
+	// MARK: - Factory method
+	func healthStandard(for length: Int) -> HealthStandard {
+		if let standard = readyStasndards[length] {
+			return standard
+		} else {
+			let standard = HealthStandard(forLength: length)
+			self.readyStasndards[length] = standard
+			return standard
+		}
+	}
+}
+
 class HealthStandard {
 
 	// MARK: - Mutation type
@@ -38,20 +59,19 @@ class HealthStandard {
 	private var patogenicMutationRange = Set<Int>()
 
 	// MARK: - Lifecycle
-	init(forLength length: Int) throws {
+	fileprivate init(forLength length: Int) {
 		self.length = length
 		// neutral mutation 1
-		// TODO: rounded
-		self.neutralMutation1Range = Set<Int>((0..<Int(Double(length) * neutralMutation1Percentage)))
+		self.neutralMutation1Range = Set<Int>((0..<Int((Double(length) * neutralMutation1Percentage).rounded())))
 		// neutral mutation 2
-		let safe2IndexesCount = Int(Double(length) * neutralMutation2Percentage)
+		let safe2IndexesCount = Int((Double(length) * neutralMutation2Percentage).rounded())
 		while self.neutralMutation2Range.count < safe2IndexesCount {
 			let index = Int.random(in: (0..<length))
 			guard !self.neutralMutation1Range.contains(index) else { continue }
 			self.neutralMutation2Range.insert(index)
 		}
 		// neutral mutation 3
-		let safe3IndexesCount = Int(Double(length) * neutralMutation3Percentage)
+		let safe3IndexesCount = Int((Double(length) * neutralMutation3Percentage).rounded())
 		while self.neutralMutation3Range.count < safe3IndexesCount {
 			let index = Int.random(in: (0..<length))
 			guard !self.neutralMutation1Range.contains(index) && !self.neutralMutation2Range.contains(index)
@@ -59,7 +79,7 @@ class HealthStandard {
 			self.neutralMutation3Range.insert(index)
 		}
 		// patogenic mutation
-		let unsafeIndexesCount = Int(Double(length) * patogenicMutationPercentage)
+		let unsafeIndexesCount = Int((Double(length) * patogenicMutationPercentage).rounded())
 		while self.patogenicMutationRange.count < unsafeIndexesCount {
 			let index = Int.random(in: (0..<length))
 			guard !self.neutralMutation1Range.contains(index) &&

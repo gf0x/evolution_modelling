@@ -16,7 +16,9 @@ final class IndividualFactory {
 
 	// MARK: - Generation rule
 	enum GenerationRule {
-		case uber, uniform, normal
+		case uber
+//		case uniform, // deprecated
+		case normal(Double)
 	}
 
 	// MARK: - Parameters
@@ -39,29 +41,28 @@ final class IndividualFactory {
 		return Array<Individual>(repeating: newUberIndividual(), count: self.populationSize)
 	}
 
-	// MARK: - Generating uniform population
-	private func newUniformPopulation() -> Population {
-		return self.population(accordingTo: SwiftStats.Distributions.Uniform(a: 0, b: Double(length)))
-	}
+	// MARK: - Generating uniform population (deprecated)
+//	private func newUniformPopulation() -> Population {
+//		return self.population(accordingTo: SwiftStats.Distributions.Uniform(a: 0, b: Double(length)))
+//	}
 
 	// MARK: - Generating normal population
-	private func newNormalPopulation() -> Population {
-		let halfLength = Double(length) / 2
-		return self.population(accordingTo: SwiftStats.Distributions.Normal(m: halfLength, v: halfLength))
+	private func newNormalPopulation(sigma: Double) -> Population {
+		return self.population(accordingTo: SwiftStats.Distributions.Normal(m: 0, v: sigma))
 	}
 
 	// MARK: - Public API
 	func newPopulation(_ rule: GenerationRule) -> Population {
 		switch rule {
 		case .uber: return newUberPopulation()
-		case .uniform: return newUniformPopulation()
-		case .normal: return newNormalPopulation()
+//		case .uniform: return newUniformPopulation() // deprecated
+		case .normal(let sigma): return newNormalPopulation(sigma: sigma)
 		}
 	}
 
 	// MARK: - Generating population according to distribution
 	private func population(accordingTo distribution: SwiftStats.ContinuousDistribution) -> Population {
-		let hammingDistances = distribution.random(populationSize).map { Int($0.rounded()) }
+		let hammingDistances = distribution.random(populationSize).map { Int(abs($0).rounded()) }
 		print(hammingDistances)
 		let uniDistribution = SwiftStats.Distributions.Uniform(a: 0, b: Double(length) - 1)
 		var initialPopulation = newUberPopulation()

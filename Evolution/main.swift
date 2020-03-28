@@ -11,18 +11,18 @@ import Foundation
 // MARK: - Algorithm input parameters
 // TODO (optional): input from console
 let length: UInt = 100 //2000 // l
-let populationSize: UInt = 10 // N
+let populationSize: UInt = 100 // N
 let pX = 0.0015 // Px basic mutation probability for one symbol
 var pM = MutationProbability.basic // Pm mutation probability ofr one symbol
 // TODO: implement pM changing
-let generationRule: IndividualFactory.GenerationRule = .uniform
+let generationRule: IndividualFactory.GenerationRule = .normal(1)
 let numberOfIterations = 1//20_000
 
 // MARK: - Main flow
 let factory = IndividualFactory(length: length, populationSize: populationSize)
-let healthStandard = try? HealthStandard(forLength: Int(length))
-print(healthStandard?.description ?? "Функція пристосованості недоступна для значення довжини l=\(length)")
-let parentChoosing: ParentChoosing = Rws()
+let healthStandard = HealthStandardFactory.single.healthStandard(for: Int(length))
+print(healthStandard.description)
+let parentChoosing: ParentChoosing = TournamentSelection(t: 12)//Rws()
 
 // MARK: - Initialization
 var population = factory.newPopulation(generationRule)
@@ -31,9 +31,11 @@ print("Початкова популяція: \(population.beautifiedDescription
 
 // MARK: - Main loop
 print("\r\nЗапуск\r\n")
+let formatter = DateFormatter()
+formatter.dateFormat = "HH:mm:ss"
 for iteration in (1...numberOfIterations) {
 
-	print("Ітерація: \(iteration)")
+	print("## Ітерація: \(iteration) \(formatter.string(from: Date()))")
 
 	population.forEach { individual in
 		// MARK: - Evaluation
@@ -43,15 +45,15 @@ for iteration in (1...numberOfIterations) {
 		// MARK: - Kill unhealthy (+ drawing!!!!)
 		// TODO:  kill if not healthy
 	}
-	print(population.healthStats(accordingTo: healthStandard!))
+	print(population.healthStats(accordingTo: healthStandard))
 
 	// MARK: - Choose parents' pool
 	population = parentChoosing.parents(from:
-		population.map { ($0, healthStandard!.testFitness(individual: $0)) }
+		population.map { ($0, healthStandard.testFitness(individual: $0)) }
 	)
 	print("Батьківський пул: \(population.beautifiedDescription)")
 
-	print(population.healthStats(accordingTo: healthStandard!))
+	print(population.healthStats(accordingTo: healthStandard))
 
 	// MARK: - Commit mutations
 	population.mutateAll(withProbability: pM)
