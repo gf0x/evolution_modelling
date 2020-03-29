@@ -23,6 +23,7 @@
 		FAAA57192430B6F800D1575A /* ExperimentStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAA57182430B6F800D1575A /* ExperimentStats.swift */; };
 		FAAA571B2430BAB700D1575A /* AnalysisEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAA571A2430BAB700D1575A /* AnalysisEngine.swift */; };
 		FAC7AF462430FC15002F8E77 /* WildTypeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC7AF452430FC15002F8E77 /* WildTypeInfo.swift */; };
+		FAC7AF4824310B1E002F8E77 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC7AF4724310B1E002F8E77 /* Settings.swift */; };
 		FAF4FE89242FD49900E19C10 /* PxProbability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF4FE88242FD49900E19C10 /* PxProbability.swift */; };
 		FAF4FE8A242FDCDE00E19C10 /* SwiftStats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF4FE84242FCAA800E19C10 /* SwiftStats.framework */; };
 		FAF4FE8B242FDCDE00E19C10 /* SwiftStats.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FAF4FE84242FCAA800E19C10 /* SwiftStats.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -69,6 +70,7 @@
 		FAAA57182430B6F800D1575A /* ExperimentStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentStats.swift; sourceTree = "<group>"; };
 		FAAA571A2430BAB700D1575A /* AnalysisEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisEngine.swift; sourceTree = "<group>"; };
 		FAC7AF452430FC15002F8E77 /* WildTypeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WildTypeInfo.swift; sourceTree = "<group>"; };
+		FAC7AF4724310B1E002F8E77 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		FAF4FE84242FCAA800E19C10 /* SwiftStats.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftStats.framework; sourceTree = "<group>"; };
 		FAF4FE88242FD49900E19C10 /* PxProbability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PxProbability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 		FA0048C823EF12E900C24747 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FAC7AF4724310B1E002F8E77 /* Settings.swift */,
 				FAAA57122430A00900D1575A /* Analysis */,
 				FAF4FE87242FD45200E19C10 /* Core */,
 				FAF4FE86242FD43100E19C10 /* Individual */,
@@ -247,6 +250,7 @@
 				FA0048CE23EF146B00C24747 /* Individual.swift in Sources */,
 				FAAA57192430B6F800D1575A /* ExperimentStats.swift in Sources */,
 				FAF4FE89242FD49900E19C10 /* PxProbability.swift in Sources */,
+				FAC7AF4824310B1E002F8E77 /* Settings.swift in Sources */,
 				FAAA57162430A26100D1575A /* AnalysisStats.swift in Sources */,
 				FA0048CC23EF133000C24747 /* IndividualFactory.swift in Sources */,
 				FA0048C223EF12B000C24747 /* main.swift in Sources */,

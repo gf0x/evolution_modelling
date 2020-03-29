@@ -35,9 +35,9 @@ final class IndividualFactory {
 	lazy var uberIndividual: Individual = { newUberIndividual() }()
 
 	// MARK: - Initialisation
-	init(length: UInt, populationSize: UInt) {
-		self.length = Int(length)
-		self.populationSize = Int(populationSize)
+	init(length: Int, populationSize: Int) {
+		self.length = length
+		self.populationSize = populationSize
 	}
 
 	// MARK: - Generating über population

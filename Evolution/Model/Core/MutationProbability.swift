@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum MutationProbability: String {
+enum MutationProbability: String, CaseIterable {
 	case basic
 	case high
 	case low

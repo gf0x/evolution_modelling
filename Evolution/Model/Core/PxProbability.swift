@@ -8,7 +8,7 @@
 
 import Foundation
 
-func getPx(forSelectionType parentChoosing: ParentChoosing, length: UInt, populationSize: UInt) -> Double {
+func getPx(forSelectionType parentChoosing: ParentChoosing, length: Int, populationSize: Int) -> Double {
 	if let tuple = pxProbabilities.first(where: { tuple in
 		tuple.parentChoosing == parentChoosing.stringRepresentation && tuple.l == length && tuple.n == populationSize
 	}) {
@@ -27,7 +27,7 @@ func getPx(forSelectionType parentChoosing: ParentChoosing, length: UInt, popula
 	return tuple.px / k_Px
 }
 
-private let pxProbabilities: [(parentChoosing: String, l: UInt, n: UInt, px: Double)] = [
+private let pxProbabilities: [(parentChoosing: String, l: Int, n: Int, px: Double)] = [
 	("rws", 10, 100, 0.0004870239),
 	("rws", 10, 200, 0.0002274225),
 	("rws", 10, 1000, 0.0000489496),
@@ -88,7 +88,7 @@ private let pxProbabilities: [(parentChoosing: String, l: UInt, n: UInt, px: Dou
 	("tournament_2", 2000, 200, 0.0000015079),
 ]
 
-private let kPx_factors: [UInt: Double] = [
+private let kPx_factors: [Int: Double] = [
 	1000:	6.2612573371,
 	2000:	14.0900462671,
 	4000:	31.1560236571,

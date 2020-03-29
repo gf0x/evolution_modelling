@@ -46,7 +46,7 @@ class HealthStandard {
 	private let patogenicMutationPercentage = 0.0232
 
 	// MARK: - Properties
-	private let length: Int
+	let length: Int
 	// neutral mutation 1
 	private let neutralMutation1Range: Set<Int>
 	private let neutralMutation1SafeSymbol = Symbol.allCases.randomElement()!

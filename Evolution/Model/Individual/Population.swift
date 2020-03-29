@@ -34,11 +34,11 @@ extension Population {
 		var healthy = 0
 		var unhealthy = 0
 		var dead = 0
-		population
+		self
 			.map { standard.testFitness(individual: $0) }
 			.forEach {
 				switch $0 {
-				case Double(length): healthy += 1
+				case Double(standard.length): healthy += 1
 				case 0.1: dead += 1
 				default: unhealthy += 1
 				}
