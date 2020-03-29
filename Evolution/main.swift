@@ -8,14 +8,19 @@
 
 import Foundation
 
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
+
 // MARK: - Algorithm input parameters
 // TODO (optional): input from console
-let length: UInt = 2_000 //2000 // l
-let populationSize: UInt = 10_000 // N
-var pM = MutationProbability.basic // Pm mutation probability ofr one symbol
+let length: UInt = 10 //2000 // l
+let populationSize: UInt = 100 // N
+var pM = MutationProbability.basic // Pm mutation probability for one symbol
 // TODO: implement pM changing
 let generationRule: IndividualFactory.GenerationRule = .normal(1)
-let numberOfIterations = 20_000
+let numberOfIterations = 10 // 20_000
 
 // MARK: - Main flow
 let factory = IndividualFactory(length: length, populationSize: populationSize)
@@ -26,9 +31,13 @@ let pX = getPx(forSelectionType: parentChoosing, length: length, populationSize:
 
 
 // MARK: - Initialization (1)
+let repetition = 1
+let experimentIdentifier =
+"exp-\(length)-\(populationSize)-\(generationRule.stringRepresentation)-\(parentChoosing.stringRepresentation)-\(pM.rawValue)-\(repetition)"
 var population = factory.newPopulation(generationRule)
 print("Початкова популяція: \(population.beautifiedDescription)")
 
+var analysisStats = [AnalysisStats]()
 
 // MARK: - Main loop (2.0)
 print("\r\nЗапуск\r\n")
@@ -44,25 +53,32 @@ for iteration in (1...numberOfIterations) {
 	// MARK: - Kill unhealthy (2.2)
 	evaluatedPopulation = evaluatedPopulation.filter { (_, health) in
 		// assume that according to the task health of 0.1 is only possible if individual has lethal mutations
-		health != 0.1
+		health > 0.1
 	}
 	// stop if all the individuals are dead
 	if evaluatedPopulation.isEmpty { break }
 
 	// MARK: - Analyze + export data
 	// TODO: implement properly
+	let analysisData = AnalysisEngine.single.analyze(evaluatedPopulation.map { $0.0 }, individualFactory: factory)
+	analysisStats.append(analysisData)
 //	print(population.healthStats(accordingTo: healthStandard))
 
 	// MARK: - Choose parents' pool (2.3)
-	population = parentChoosing.parents(from: evaluatedPopulation)
+	population = parentChoosing.parents(from: evaluatedPopulation, populationSize: Int(populationSize))
 //	print("Батьківський пул: \(population.beautifiedDescription)")
 //
 //	print(population.healthStats(accordingTo: healthStandard))
 
 	// MARK: - Commit mutations (2.4)
-	population.mutateAll(withProbability: pM)
+	population.mutateAll(withProbability: pM.value)
 
 //	print("\r\n\r\nПопуляція: \(population.beautifiedDescription)")
 }
 
+let experimentStats = ExperimentStats(identifier: experimentIdentifier,
+									  stats: analysisStats)
+let data = try! JSONEncoder().encode(experimentStats)
+let filename = URL(string: "file://\(CommandLine.arguments[1])\(experimentIdentifier).json")!
+try! data.write(to: filename)
 //print("\r\nКінцева популяція: \(population.beautifiedDescription)")

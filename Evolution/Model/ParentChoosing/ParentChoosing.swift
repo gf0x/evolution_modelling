@@ -10,5 +10,5 @@ import Foundation
 
 protocol ParentChoosing {
 	var stringRepresentation: String { get }
-	func parents(from testedPopulation: [(individual: Individual, health: Double)]) -> Population
+	func parents(from testedPopulation: [(individual: Individual, health: Double)], populationSize: Int) -> Population
 }

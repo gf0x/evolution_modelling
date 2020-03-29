@@ -8,11 +8,20 @@
 
 import Foundation
 
-class MutationProbability {
-	static let basic = pX // Px
-	static let high = 1.5 * pX // PX+0.5*PX
-	static let low = 0.5 * pX // PX–0.5*PX
-	static let veryLow = 0.1 * pX // PX/10
+enum MutationProbability: String {
+	case basic
+	case high
+	case low
+	case veryLow
+
+	var value: Double {
+		switch self {
+		case .basic: return pX // Px
+		case .high: return 1.5 * pX // PX+0.5*PX
+		case .low: return 0.5 * pX // PX–0.5*PX
+		case .veryLow: return 0.1 * pX // PX/10
+		}
+	}
 }
 
 extension Double {

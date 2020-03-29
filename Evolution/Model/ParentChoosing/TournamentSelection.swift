@@ -24,9 +24,9 @@ final class TournamentSelection: ParentChoosing {
 	}
 
 	// MARK: - ParentChoosing
-	func parents(from testedPopulation: [(individual: Individual, health: Double)]) -> Population {
+	func parents(from testedPopulation: [(individual: Individual, health: Double)], populationSize: Int) -> Population {
 		var parentPool = Population()
-		for _ in (0..<testedPopulation.count) {
+		for _ in (0..<populationSize) {
 			let tournamentMembers = Distributions.Uniform(a: 0, b: Double(testedPopulation.count - 1))
 				.random(self.t)
 				.map { testedPopulation[Int($0.rounded())] }

@@ -19,11 +19,20 @@ final class IndividualFactory {
 		case uber
 //		case uniform, // deprecated
 		case normal(Double)
+
+		var stringRepresentation: String {
+			switch self {
+			case .uber: return "perfect"
+			case .normal(let v): return "normal\(Int(v))"
+			}
+		}
 	}
 
 	// MARK: - Parameters
 	let length: Int
 	let populationSize: Int
+
+	lazy var uberIndividual: Individual = { newUberIndividual() }()
 
 	// MARK: - Initialisation
 	init(length: UInt, populationSize: UInt) {
