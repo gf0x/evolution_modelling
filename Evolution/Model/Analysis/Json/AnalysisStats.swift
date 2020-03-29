@@ -13,8 +13,12 @@ struct AnalysisStats: Codable {
 	let hammingDistancePairs: HammingDistancePairs
 	let hammingDistanceTarget: HammingDistanceTarget
 	let hammingDistanceWild: HammingDistanceWild
-	let polymorphicGenesPercentageAccornigToTarget: Double
+	let singlePolymorphicGenesPercentageAccornigToTarget: Double
+	let multiplePolymorphicGenesPercentageAccornigToTarget: Double
 	let polymorphicGenesPercentageAccornigToWildType: Double
+	let wildTypeInfo: WildTypeInfo
+	let averageHealthDeviation: Double
+	let maxHealthDeviation: Double
 }
 
 /// Used to represent analysis data for paired distances for each individual

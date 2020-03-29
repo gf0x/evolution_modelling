@@ -15,8 +15,9 @@ class AnalysisEngine {
 	private init() {}
 
 	// MARK: - Internal API
-	func analyze(_ population: Population, individualFactory: IndividualFactory)
+	func analyze(_ evaluatedPopulation: [(Individual, Double)], individualFactory: IndividualFactory)
 		-> AnalysisStats {
+			let population = evaluatedPopulation.map { $0.0 }
 			// init
 			let targetIndividual = individualFactory.uberIndividual
 			let wildType = self.wildType(for: population)
@@ -42,13 +43,29 @@ class AnalysisEngine {
 			let polymorphicCount = self.getPolymorohicGenesPercentage(for: population,
 																	  targetType: targetIndividual,
 																	  wildType: wildType)
+			// wild type info
+			let distanceWildTarget = targetIndividual <-> wildType
+			let polymorphicGenesToTargetPercentage = Double(distanceWildTarget) / Double(targetIndividual.count) * 100
+			let wildTypeInfo = WildTypeInfo(polymorphicGenesToTargetCount: distanceWildTarget,
+											polymorphicGenesToTargetPercentage: polymorphicGenesToTargetPercentage)
+			// health deviation
+			let populationHealth = evaluatedPopulation.map { $0.1 }
+			// N.B! targetIndividual.count == max health possible
+			let averageHealthDeviation =
+				abs((populationHealth.reduce(0, +) / Double(populationHealth.count)) - Double(targetIndividual.count))
+			let maxHealthDeviation =
+				abs(populationHealth.max()! - Double(targetIndividual.count))
 			// return
 			return AnalysisStats(individuals: population,
 								 hammingDistancePairs: hammingPairs,
 								 hammingDistanceTarget: targetDistances,
 								 hammingDistanceWild: wildDistances,
-								 polymorphicGenesPercentageAccornigToTarget: polymorphicCount.accordingToTarget,
-								 polymorphicGenesPercentageAccornigToWildType: polymorphicCount.accordingToWild)
+								 singlePolymorphicGenesPercentageAccornigToTarget: polymorphicCount.singleAccordingToTarget,
+								 multiplePolymorphicGenesPercentageAccornigToTarget: polymorphicCount.multipleAccordingToTarget,
+								 polymorphicGenesPercentageAccornigToWildType: polymorphicCount.accordingToWild,
+								 wildTypeInfo: wildTypeInfo,
+								 averageHealthDeviation: averageHealthDeviation,
+								 maxHealthDeviation: maxHealthDeviation)
 	}
 
 
@@ -88,33 +105,44 @@ class AnalysisEngine {
 					  moda: Array(Set(distances.filter { enumeratedDistances[$0] == biggestFrequency })),
 					  minValue: enumeratedDistances.keys.min()!,
 					  maxValue: enumeratedDistances.keys.max()!,
-					  variationFactor: sigma / mathExpectation),
+					  variationFactor: sigma / ((mathExpectation == 0) ? 1 : mathExpectation)),
 				enumeratedDistances
 		)
 	}
 
 	private func getPolymorohicGenesPercentage(for population: Population, targetType: Individual, wildType: Individual)
-		-> (accordingToTarget: Double, accordingToWild: Double) {
-			var targetCounter = 0.0
+		-> (singleAccordingToTarget: Double, multipleAccordingToTarget: Double, accordingToWild: Double) {
+			var singleTargetCounter = 0.0
+			var multipleTargetCounter = 0.0
 			var wildCounter = 0.0
 			for i in 0..<targetType.count {
-				var targetDiffFound = false
+				var singleTargetDiffFound = false
+				var multipleTargetDiffFound = false
+				var targetDiffSymbol: Symbol?
 				var wildDiffFound = false
 				for individual in population {
-					if individual[i] != targetType[i] && !targetDiffFound {
-						targetDiffFound = true
-						targetCounter += 1
+					if individual[i] != targetType[i] {
+						if !singleTargetDiffFound {
+							singleTargetDiffFound = true
+							targetDiffSymbol = individual[i]
+							singleTargetCounter += 1
+						} else if individual[i] != targetDiffSymbol {
+							multipleTargetDiffFound = true
+							singleTargetCounter -= 1
+							multipleTargetCounter += 1
+						}
 					}
 					if individual[i] != wildType[i] && !wildDiffFound {
 						wildDiffFound = true
 						wildCounter += 1
 					}
-					if targetDiffFound && wildDiffFound {
+					if multipleTargetDiffFound && wildDiffFound {
 						break
 					}
 				}
 			}
-			return (accordingToTarget: targetCounter / Double(targetType.count) * 100,
+			return (singleAccordingToTarget: singleTargetCounter / Double(targetType.count) * 100,
+					multipleAccordingToTarget: multipleTargetCounter / Double(targetType.count) * 100,
 					accordingToWild: wildCounter / Double(wildType.count) * 100)
 	}
 

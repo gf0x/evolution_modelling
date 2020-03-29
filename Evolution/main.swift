@@ -18,7 +18,6 @@ func getDocumentsDirectory() -> URL {
 let length: UInt = 10 //2000 // l
 let populationSize: UInt = 100 // N
 var pM = MutationProbability.basic // Pm mutation probability for one symbol
-// TODO: implement pM changing
 let generationRule: IndividualFactory.GenerationRule = .normal(1)
 let numberOfIterations = 10 // 20_000
 
@@ -34,10 +33,11 @@ let pX = getPx(forSelectionType: parentChoosing, length: length, populationSize:
 let repetition = 1
 let experimentIdentifier =
 "exp-\(length)-\(populationSize)-\(generationRule.stringRepresentation)-\(parentChoosing.stringRepresentation)-\(pM.rawValue)-\(repetition)"
+var analysisStats = [AnalysisStats]()
+
 var population = factory.newPopulation(generationRule)
 print("Початкова популяція: \(population.beautifiedDescription)")
 
-var analysisStats = [AnalysisStats]()
 
 // MARK: - Main loop (2.0)
 print("\r\nЗапуск\r\n")
@@ -60,7 +60,7 @@ for iteration in (1...numberOfIterations) {
 
 	// MARK: - Analyze + export data
 	// TODO: implement properly
-	let analysisData = AnalysisEngine.single.analyze(evaluatedPopulation.map { $0.0 }, individualFactory: factory)
+	let analysisData = AnalysisEngine.single.analyze(evaluatedPopulation, individualFactory: factory)
 	analysisStats.append(analysisData)
 //	print(population.healthStats(accordingTo: healthStandard))
 
